@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<head>
+<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+body {
+  text-align: center;
+  font-family: 'Fjalla One';
+  font-size: 20px;
+  background: #e6eaf0;
+}
+button {
+  margin: 40px;
+}
+input {
+  font-size: 24px;
+}
+.fill {
+  background: white;
+  color: red;
+  border-bottom: 2px black solid;
+  font-family: 'Shadows Into Light';
+  padding: 0 6px;
+  margin: 4px;
+}
+</style>
+</head>
+
+<body>
+<div class="prompt"></div>
+<div class="secondPrompt"></div>
+<div class="thirdPrompt"></div>
+<div class="fourthPrompt"></div>
+
+<button id="next">Next</button>
+<script>
+// List of prompts for the user
+var prompts = [
+	'Type your name', //Fran
+	'Type an adjective', //red
+	'Type a noun', //shirt
+  'Type another noun', //banana
+	'Type a verb in the past tense', //jumped
+	'Type another adjective', //scared
+  'Type a plural noun', //pies
+	'Type another plural noun', //swords
+	'Type one last adjective' //confused
+   ];
+
+var answers=[];
+// Keep track of current prompt we're on
+var currentPrompt = 0;
+
+// A function that will call the next prompt
+var nextPrompt = function() {
+  //if there's no answer in the form
+  if (currentPrompt != 0){
+    answers.push($('input').val());
+  }
+	// if there is a next prompt
+	if (currentPrompt < prompts.length) {
+		// ask user to enter a new word
+		$('.prompt').html(prompts[currentPrompt] +'<br><input id="prompts" type="text">');
+
+        // Sets cursor automatically to text box for better UX
+        $("#prompts").focus();
+
+        //Makes it so ENTER clicks the Next button
+	$("#prompts").keyup(function(event) {
+    	if (event.keyCode === 13) {
+        	$("#next").click();
+    	}
+});
+
+        // move the next prompt into variable currentPrompt
+		currentPrompt = currentPrompt + 1;
+	}
+	//or else if we're at the end of the array
+	else {
+		// put a new message into the html.
+		showFinal();
+	}
+}
+
+//puts user answers into HTML
+var showFinal = function() {
+  $('.prompt').html('This is the story of <span class="fill">'+answers[0]+'</span> and the <span class="fill">'+answers[1]+'</span> <span class="fill">'+answers[2]+'</span>.');
+  $('.secondPrompt').html('One day, an evil <span class="fill">'+answers[3]+'</span> appeared. The evil <span class="fill">'+answers[3]+'</span>'+'<span class="fill">'+answers[4]+'</span> at <span class="fill">'+answers[0]+'</span>.');
+  $('.thirdPrompt').html('<span class="fill">'+answers[0]+'</span> was '+'<span class="fill">'+answers[5]+'</span>.'+' They called for help and two '+'<span class="fill">'+answers[6]+'</span> brought their '+'<span class="fill">'+answers[7]+'</span>.');
+  $('.fourthPrompt').html('The evil <span class="fill">'+answers[3]+'</span> was very '+'<span class="fill">'+answers[8]+'</span>. It ran away. <br>The day was saved!');
+  // and then hide button
+  $("button").hide();
+
+}
+// run nextPrompt function when button is clicked
+$('button').click(function() {
+	nextPrompt();
+});
+
+// Show the first prompt as soon as js loads
+nextPrompt();
+
+// Enter presses the Next button
+
+
+</script>
+
+</body>
