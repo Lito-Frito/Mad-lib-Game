@@ -5,6 +5,7 @@ This is an HTML file that uses JS/Jquery to create a Mad-lib game. I followed Ge
 ## Getting Started
 
 Access the file at:
+
 https://mad-lib-game.netlify.com/
 
 ## Acknowledgments
