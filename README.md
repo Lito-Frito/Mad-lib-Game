@@ -10,4 +10,5 @@ https://mad-lib-game.netlify.com/
 ## Acknowledgments
 
 Thank you to General Assembly for the resources. Here's a link to see their tutorials:
+
 https://dash.generalassemb.ly/
